@@ -2,7 +2,6 @@ language: python
 
 deploy:
   provider: heroku
-  api_key: ea3a5ed9-8b38-4644-b522-24528527abc3
   app:
     master: heroku-travis-production-env
     staging: heroku-travis-staging-env
