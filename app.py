@@ -5,4 +5,4 @@ APP = Flask(__name__)
 
 @APP.route('/')
 def hello_world():
-    return 'NEW PIPELINE TEST'
+    return 'NEW PIPELINE TEST - TRAVIS'
