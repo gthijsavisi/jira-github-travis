@@ -1,0 +1,41 @@
+before_scripts:
+  script:
+    - apt-get update -qy
+    - apt-get install -y python-dev python-pip
+    - pip install -r requirements.txt
+
+test:pylint:
+  image: python:3.6
+  script:
+    - pip install pylint --quiet
+    - pylint --ignored-classes=_socketobject *.py
+  only:
+  - staging
+  
+test:pytest:
+  image: python:3.6
+  script:
+    - pip install pytest --quiet
+    - pytest
+  only:
+  - staging
+  
+staging:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+  only:
+  - staging
+
+production:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  only:
+  - master
