@@ -1,4 +1,6 @@
-eploy:
+language: python
+
+deploy:
   provider: heroku
   api_key: ea3a5ed9-8b38-4644-b522-24528527abc3
   app:
